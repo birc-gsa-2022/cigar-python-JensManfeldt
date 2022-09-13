@@ -33,12 +33,19 @@ def cigar_to_edits(cigar: str) -> str:
     Returns:
         str: The edit operations the CIGAR string describes.
 
-    >>> cigar_to_edits("1M1D6M1I4M")
+    cigar_to_edits("1M1D6M1I4M")
     'MDMMMMMMIMMMM'
 
     """
-    # FIXME: construct the edits sequence
-    return ""
+
+    pairs = split_pairs(cigar)
+    print(pairs)
+    returnString = ""
+    for (x,y) in pairs: 
+        for _ in range(int(x)):
+            returnString = returnString + y
+    
+    return returnString
 
 
 def split_blocks(x: str) -> list[str]:
@@ -73,5 +80,25 @@ def edits_to_cigar(edits: str) -> str:
     '1M1D6M1I4M'
 
     """
-    # FIXME: Compute the cigar
-    return ''
+    if edits == "":
+        return edits
+        
+    cigar = ""
+    currChar = edits[0]
+    count = 1
+    for char in edits[1:]:
+        if char == currChar:
+            count += 1
+            continue
+
+        cigar = cigar + str(count) + currChar
+        count = 1
+        currChar = char
+    
+    cigar = cigar + str(count) + currChar
+        
+
+
+    return cigar
+
+print(edits_to_cigar("MDIMID"))
