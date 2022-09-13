@@ -20,3 +20,6 @@ def test_edits_to_cigar() -> None:
     assert edits_to_cigar("MMDDIIMMIIDD") == "2M2D2I2M2I2D"
     assert edits_to_cigar("MDDIIIMMIDD") == "1M2D3I2M1I2D"
     assert edits_to_cigar("") == ""
+
+test_cigar_to_edits()
+test_edits_to_cigar()
